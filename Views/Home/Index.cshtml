@@ -1,0 +1,53 @@
+﻿@using TXTextControl.Web.MVC
+@using TXTextControl.Web
+
+@Html.TXTextControl().TextControl(settings =>
+{
+    settings.Dock = DockStyle.Window;
+}).Render()
+
+<script>
+
+    // ribbon can be manipulated when complete ribbon has been loaded
+    TXTextControl.addEventListener("ribbonTabsLoaded", function (e) {
+
+        // get the new tab container and add it after the existing last tab
+        $.get("/RibbonExtensions/NewTab/NewTab.html", function (data) {
+
+            $("ul.tabs:first li:last").after(data);
+
+            // attach the click event to switch tabs on a click
+            $("#tabNew").click(function () {
+                switchTabs($(this));
+            });
+
+        });
+
+        // get the ribbon tab content and add it to the content container
+        $.get("/RibbonExtensions/NewTab/NewTabContent.html", function (data) {
+
+            $("#txRibbonTabContentContainer div:last").after(data);
+
+        });
+
+        // get the ribbon tab content and add it after the Merge Fields group in
+        // the reporting tab
+        $.get("/RibbonExtensions/ReportingTab/NewGroup.html", function (data) {
+
+            $("#ribbonGroupMergeField").after(data);
+
+        });
+
+    });
+
+    // enables the clicked tab and disables other tabs
+    function switchTabs(tabObject) {
+        $('#txRibbonTabContentContainer div.tab-content').css("display", "none");
+        $('#ribbonbar ul.tabs a').removeClass("selected");
+        var id = tabObject.attr("rel");
+
+        $('#' + id).css("display", "inline-block");
+        tabObject.addClass("selected");
+    }
+
+</script>
