@@ -26,7 +26,7 @@
         // get the ribbon tab content and add it to the content container
         $.get("/RibbonExtensions/NewTab/NewTabContent.html", function (data) {
 
-            $("#txRibbonTabContentContainer div:last").after(data);
+            $("#txRibbonTabContentContainer").after(data);
 
         });
 
