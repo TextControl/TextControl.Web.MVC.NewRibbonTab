@@ -8,7 +8,9 @@ using System.Web.Http;
 using TXTextControl.Web;
 
 namespace tx_ribbon_add.Controllers {
+
    public class TXWebSocketController : ApiController {
+
       public HttpResponseMessage Get() {
          if (HttpContext.Current.IsWebSocketRequest) {
             var wsHandler = new WebSocketHandler();

@@ -16,7 +16,7 @@
 
             $("ul.tabs:first li:last").after(data);
 
-            // attach the click event to switch tabs on a click
+            //attach the click event to switch tabs on a click
             $("#tabNew").click(function () {
                 switchTabs($(this));
             });
@@ -26,12 +26,12 @@
         // get the ribbon tab content and add it to the content container
         $.get("/RibbonExtensions/NewTab/NewTabContent.html", function (data) {
 
-            $("#txRibbonTabContentContainer").after(data);
+            $("#txRibbonTabContentContainer").append(data);
 
         });
 
-        // get the ribbon tab content and add it after the Merge Fields group in
-        // the reporting tab
+        //get the ribbon tab content and add it after the Merge Fields group in
+        //the reporting tab
         $.get("/RibbonExtensions/ReportingTab/NewGroup.html", function (data) {
 
             $("#ribbonGroupMergeField").after(data);
